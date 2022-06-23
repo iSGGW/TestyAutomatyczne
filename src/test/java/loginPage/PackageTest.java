@@ -1,6 +1,6 @@
 package loginPage;
 
-import components.BaseBrowserScreen;
+import components.screens.BaseBrowserScreen;
 import components.BaseClass;
 import components.handlers.ContextHandler;
 import org.testng.Assert;
@@ -20,6 +20,7 @@ public class PackageTest extends BaseClass {
         baseBrowserScreen = new BaseBrowserScreen(device);
         baseBrowserScreen.enterSite("https://20.218.104.224:8443/inz/build/search");
         Assert.assertTrue(contextHandler.switchToWebContext());
+        baseBrowserScreen.enterConnectionNotPrivate();
 
     }
 }
