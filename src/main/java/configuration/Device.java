@@ -4,6 +4,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import lombok.Getter;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,9 +19,12 @@ public class Device {
     @Getter
     private boolean isIOS;
     private String udid;
+    @Getter
+    private WebDriverWait webDriverWait;
 
     public Device(){
         System.out.println("Creating device");
+        webDriverWait = new WebDriverWait(driver, 10);
     }
 
     private void setIsIOS() {
