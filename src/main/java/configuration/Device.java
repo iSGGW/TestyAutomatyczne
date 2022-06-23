@@ -2,6 +2,8 @@ package configuration;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import lombok.Getter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,16 +17,18 @@ import java.util.regex.Pattern;
 
 public class Device {
     @Getter
-    private AppiumDriver driver;
+    private AndroidDriver driver;
     @Getter
     private boolean isIOS;
     private String udid;
     @Getter
     private WebDriverWait webDriverWait;
+    @Getter
+    private String bundleId;
 
     public Device(){
         System.out.println("Creating device");
-        webDriverWait = new WebDriverWait(driver, 10);
+        bundleId = "com.android.chrome";
     }
 
     private void setIsIOS() {
@@ -34,10 +38,11 @@ public class Device {
 
     public void setDriver(URL url, DesiredCapabilities caps) {
         driver = new AndroidDriver(url, caps);
+        webDriverWait = new WebDriverWait(driver, 10);
     }
 
     public void startApp(){
-        driver.activateApp("com.android.chrome");
+        driver.activateApp(bundleId);
     }
 
     public String getUDID(){
@@ -71,5 +76,9 @@ public class Device {
 
         System.out.println("PHONE UDUD - " + udid);
         return udid;
+    }
+
+    public void pressEnter(){
+        driver.pressKey(new KeyEvent(AndroidKey.ENTER));
     }
 }
