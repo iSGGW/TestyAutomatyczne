@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum Context {
     NATIVE("NATIVE_APP"),
-    WEB("WEBVIEW_wit.android");
+    WEB("WEBVIEW_chrome");
 
     @Getter
     private String context;
