@@ -1,8 +1,8 @@
 package loginPage;
 
-import components.screens.BaseBrowserScreen;
 import components.BaseClass;
 import components.handlers.ContextHandler;
+import components.screens.BaseBrowserScreen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

@@ -3,11 +3,7 @@ package components.screens;
 import configuration.Device;
 import configuration.ElementState;
 import configuration.Wait;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.nativekey.AndroidKey;
-import io.appium.java_client.android.nativekey.KeyEvent;
-import io.appium.java_client.pagefactory.AndroidBy;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
@@ -19,7 +15,7 @@ import java.time.Duration;
 import static configuration.Utils.delay;
 
 public class BaseBrowserScreen {
-    Device device;
+    protected Device device;
     private Wait wait;
     private ElementState elementState;
 
