@@ -6,6 +6,8 @@ import components.screens.BaseBrowserScreen;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 public class PackageTest extends BaseClass {
     private ContextHandler contextHandler;
     private BaseBrowserScreen baseBrowserScreen;
@@ -21,6 +23,16 @@ public class PackageTest extends BaseClass {
         baseBrowserScreen.enterSite("https://20.218.104.224:8443/inz/build/search");
         Assert.assertTrue(contextHandler.switchToWebContext());
         baseBrowserScreen.enterConnectionNotPrivate();
+
+    }
+
+    @Test
+    public void login_L_1(){
+
+    }
+
+    @Test
+    public void login_L_2(){
 
     }
 }
