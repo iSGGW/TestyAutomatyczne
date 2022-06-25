@@ -10,7 +10,11 @@ public class ElementState {
     }
 
     public boolean isVisible(WebElement element){
-        if(element.isDisplayed()) return true;
-        else return false;
+        try{
+            element.isDisplayed();
+            return true;
+        }catch(Exception e){
+            return false;
+        }
     }
 }

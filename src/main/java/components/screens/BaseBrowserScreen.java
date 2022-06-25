@@ -16,8 +16,8 @@ import static configuration.Utils.delay;
 
 public class BaseBrowserScreen {
     protected Device device;
-    private Wait wait;
-    private ElementState elementState;
+    protected Wait wait;
+    protected ElementState elementState;
 
     @AndroidFindBy(id = "com.android.chrome:id/search_box_text")
     private MobileElement textBox;
@@ -34,12 +34,18 @@ public class BaseBrowserScreen {
     public BaseBrowserScreen(Device d){
         PageFactory.initElements(new AppiumFieldDecorator(d.getDriver(), Duration.ofSeconds(10)), this);
         device = d;
+        elementState = new ElementState(device);
         wait = new Wait(device);
     }
 
     public void enterSite(String url){
 //        wait.waitUntilIsVisible(textBox);
-        textBox.click();
+        delay(3000);
+        if(elementState.isVisible(textBox)){
+            textBox.click();
+        }else{
+            urlBar.click();
+        }
         wait.waitUntilIsVisible(urlBar);
         urlBar.sendKeys(url);
         device.pressEnter();

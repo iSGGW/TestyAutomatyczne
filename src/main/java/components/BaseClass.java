@@ -5,13 +5,12 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.json.JsonException;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
+import java.time.Duration;
 import java.util.Map;
 
 public class BaseClass {
@@ -35,13 +34,26 @@ public class BaseClass {
         URL url = new URL("http://127.0.0.1:4723/wd/hub");
         device.setDriver(url, caps);
         driver = (AndroidDriver) device.getDriver();
+        try{
+            device.getDriver().terminateApp(device.getBundleId());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        init();
     }
 
-
+    public void init(){
+        System.out.println("Empty init");
+    }
 
     @AfterSuite
     public void tearDown(){
         driver.terminateApp(device.getBundleId());
         driver.quit();
+    }
+
+    @AfterMethod
+    public void afterMethod(){
+        System.out.println("--------------------------------------------------");
     }
 }
