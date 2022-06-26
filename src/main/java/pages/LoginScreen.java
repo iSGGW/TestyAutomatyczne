@@ -1,5 +1,6 @@
 package pages;
 
+import components.screens.SearchScreen;
 import configuration.Device;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;

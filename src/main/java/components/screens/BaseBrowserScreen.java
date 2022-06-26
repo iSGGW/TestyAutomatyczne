@@ -39,7 +39,7 @@ public class BaseBrowserScreen {
     }
 
     public void enterSite(String url){
-//        wait.waitUntilIsVisible(textBox);
+        System.out.println("Entering site " + url);
         delay(3000);
         if(elementState.isVisible(textBox)){
             textBox.click();

@@ -18,7 +18,7 @@ public class Utils {
 //        for(int i = 0; i < element.getAttribute("value").length(); i++){
 //            device.getDriver().pressKey(new KeyEvent(67));
 //        }
-
+        delay(500);
         element.click();
         element.sendKeys(Keys.CONTROL + "a");
         element.sendKeys(Keys.DELETE);

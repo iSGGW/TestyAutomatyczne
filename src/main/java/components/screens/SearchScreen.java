@@ -18,6 +18,7 @@ public class SearchScreen extends BaseBrowserScreen{
     private ElementState elementState;
     private SoftAssert sa;
 
+    @Getter
     @FindBy(xpath = "//span[text()='Otwórz menu']")
     private WebElement lblOpenMenu;
 
@@ -88,9 +89,6 @@ public class SearchScreen extends BaseBrowserScreen{
     @FindBy(xpath = "//th[text() = \"Status\"]")
     private WebElement tabHeadingStatus;
 
-    @FindBy(xpath = "//a[@href=\"#/logout\"]")
-    private WebElement btnLogout;
-
     public SearchScreen(Device d){
         super(d);
         PageFactory.initElements(new AppiumFieldDecorator(d.getDriver(), Duration.ofSeconds(10)), this);
@@ -99,6 +97,7 @@ public class SearchScreen extends BaseBrowserScreen{
     }
 
     public void assertFirstScreenIsShown(){
+        System.out.println("Assert first screen is shown");
         sa.assertTrue(elementState.isVisible(lblOpenMenu));
         sa.assertTrue(elementState.isVisible(lblSelectRoom));
         sa.assertTrue(elementState.isVisible(lblScanningItems));
@@ -113,6 +112,7 @@ public class SearchScreen extends BaseBrowserScreen{
     }
 
     public void assertSecondScreenIsShown(){
+        System.out.println("Assert second screen is shown");
         sa.assertTrue(elementState.isVisible(lblOpenMenu));
         sa.assertTrue(elementState.isVisible(lblSelectRoom));
         sa.assertTrue(elementState.isVisible(lblScanningItems));
@@ -122,6 +122,7 @@ public class SearchScreen extends BaseBrowserScreen{
     }
 
     public void chooseBuilding(String building){
+        System.out.println("Choosing building " + building);
         lstSelectBuilding.click();
         delay(2000);
         String xpath = "//div[@class=\"ant-select-item-option-content\" and text()='" + building + "']";
@@ -130,6 +131,7 @@ public class SearchScreen extends BaseBrowserScreen{
     }
 
     public void chooseFloor(int floor){
+        System.out.println("Choosing floor " + floor);
         lstSelectFloor.click();
         delay(2000);
         if(floor > 4 || floor < 0) return;
@@ -139,6 +141,7 @@ public class SearchScreen extends BaseBrowserScreen{
     }
 
     public void chooseRoom(int room){
+        System.out.println("Choosing room " + room);
         lstSelectRoom.click();
         delay(2000);
         String xpath = "//div[@class = 'ant-select-item ant-select-item-option ant-select-item-option-active' and @title='" + room + "']";
@@ -147,10 +150,12 @@ public class SearchScreen extends BaseBrowserScreen{
     }
 
     public void clickAddRandomJSON(){
+        System.out.println("Click add random JSON");
         btnAddRandomJSON.click();
     }
 
     public void clickNext(){
+        System.out.println("Click next");
         if(!btnNext.isEnabled()){
             System.out.println("Button is disabled!!");
             return;
@@ -159,22 +164,22 @@ public class SearchScreen extends BaseBrowserScreen{
         }
     }
 
-    public void clickOpenMenu(){
+    public Menu clickOpenMenu(){
+        System.out.println("Open menu");
         wait.waitUntilIsVisible(lblOpenMenu);
         lblOpenMenu.click();
-        wait.waitUntilIsVisible(btnLogout);
+        wait.waitUntilIsVisible(new Menu(device).getBtnLogout());
+        return new Menu(device);
     }
 
     public void closeMenu(){
+        System.out.println("Close menu");
         lblCloseMenu.click();
         wait.waitUntilIsVisible(lblOpenMenu);
     }
 
-    public void clickLogOut(){
-        btnLogout.click();
-    }
-
     private boolean findInventarizationItem(String id, String name, String floor, String room, String status){
+        System.out.println("Find inventarization item" + id + " " + name + " " + floor + " " + room + " " + status);
         try{
             device.getDriver().findElement(By.xpath("//th[text() = '" + id + "']"));
             device.getDriver().findElement(By.xpath("//th[text() = '" + name + "']"));
@@ -202,4 +207,5 @@ public class SearchScreen extends BaseBrowserScreen{
         sa.assertTrue(elementState.isVisible(lblScanningItems));
         sa.assertTrue(elementState.isVisible(lblResultInventarization));
     }
+
 }

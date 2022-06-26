@@ -13,6 +13,8 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.Map;
 
+import static configuration.Utils.delay;
+
 public class BaseClass {
     protected AndroidDriver driver;
     protected Device device;
@@ -55,5 +57,6 @@ public class BaseClass {
     @AfterMethod
     public void afterMethod(){
         System.out.println("--------------------------------------------------");
+        delay(1000);
     }
 }
