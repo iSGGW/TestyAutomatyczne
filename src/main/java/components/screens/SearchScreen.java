@@ -3,6 +3,7 @@ package components.screens;
 import configuration.Device;
 import configuration.ElementState;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,6 +20,9 @@ public class SearchScreen extends BaseBrowserScreen{
 
     @FindBy(xpath = "//span[text()='Otwórz menu']")
     private WebElement lblOpenMenu;
+
+    @FindBy(xpath = "//span[@class=\"anticon anticon-left\"]/..")
+    private WebElement lblCloseMenu;
 
     @FindBy(xpath = "//div[text()='Wybór pomieszczenia']")
     private WebElement lblSelectRoom;
@@ -47,6 +51,7 @@ public class SearchScreen extends BaseBrowserScreen{
     @FindBy(xpath = "//span[text() ='Wybierz pomieszczenie']")
     private WebElement lstSelectRoom;
 
+    @Getter
     @FindBy(xpath = "//button[contains(@class, 'ant-btn ant-btn-primary')]")
     private WebElement btnNext;
 
@@ -136,7 +141,7 @@ public class SearchScreen extends BaseBrowserScreen{
     public void chooseRoom(int room){
         lstSelectRoom.click();
         delay(2000);
-        String xpath = "//div[@class=\"ant-select-item-option-content\" and text()='" + room + "']";
+        String xpath = "//div[@class = 'ant-select-item ant-select-item-option ant-select-item-option-active' and @title='" + room + "']";
         System.out.println(xpath);
         device.getDriver().findElement(By.xpath(xpath)).click();
     }
@@ -155,8 +160,14 @@ public class SearchScreen extends BaseBrowserScreen{
     }
 
     public void clickOpenMenu(){
+        wait.waitUntilIsVisible(lblOpenMenu);
         lblOpenMenu.click();
         wait.waitUntilIsVisible(btnLogout);
+    }
+
+    public void closeMenu(){
+        lblCloseMenu.click();
+        wait.waitUntilIsVisible(lblOpenMenu);
     }
 
     public void clickLogOut(){
@@ -177,5 +188,18 @@ public class SearchScreen extends BaseBrowserScreen{
             return false;
         }
 
+    }
+
+    public void assertThirdScreen() {
+        sa.assertTrue(elementState.isVisible(lblChooseItem));
+        sa.assertTrue(elementState.isVisible(lblDetails));
+        sa.assertTrue(elementState.isVisible(tabHeadingFloor));
+        sa.assertTrue(elementState.isVisible(tabHeadingID));
+        sa.assertTrue(elementState.isVisible(tabHeadingName));
+        sa.assertTrue(elementState.isVisible(tabHeadingRoom));
+        sa.assertTrue(elementState.isVisible(tabHeadingStatus));
+        sa.assertTrue(elementState.isVisible(lblSelectRoom));
+        sa.assertTrue(elementState.isVisible(lblScanningItems));
+        sa.assertTrue(elementState.isVisible(lblResultInventarization));
     }
 }

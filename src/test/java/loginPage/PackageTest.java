@@ -34,69 +34,107 @@ public class PackageTest extends BaseClass {
         modifyScreen = new ModifyScreen(device);
     }
 
-    @Test
-    public void login_L_1(){
-        System.out.println("START login_L_1");
-        loginScreen.assertScreenIsDisplayedCorrectly();
-        loginScreen.loginToAccount("leanne2", "password2");
-        searchScreen.clickOpenMenu();
-        searchScreen.clickLogOut();
-        loginScreen.assertScreenIsDisplayedCorrectly();
-    }
+//    @Test
+//    public void login_L_1(){
+//        System.out.println("START login_L_1");
+//        loginScreen.assertScreenIsDisplayedCorrectly();
+//        loginScreen.loginToAccount("leanne2", "password2");
+//        searchScreen.clickOpenMenu();
+//        searchScreen.clickLogOut();
+//        loginScreen.assertScreenIsDisplayedCorrectly();
+//    }
+//
+//    @Test
+//    public void login_L_2(){
+//        System.out.println("START login_L_2");
+//        loginScreen.loginToAccount("leanne", "1234");
+//        loginScreen.checkPopUp();
+//        loginScreen.assertScreenIsDisplayedCorrectly();
+//
+//    }
+//
+//    @Test
+//    public void login_L_3(){
+//        System.out.println("START login_L_3");
+//        loginScreen.loginToAccount("leanne", "1234");
+//        loginScreen.checkPopUp();
+//        loginScreen.enterPassword("password");
+//        loginScreen.clickLogin();
+//        searchScreen.assertFirstScreenIsShown();
+//    }
+//
+//    @Test
+//    public void login_L_4(){
+//        System.out.println("START login_L_4");
+//        searchScreen.clickOpenMenu();
+//        searchScreen.clickLogOut();
+//        loginScreen.loginToAccount("leanne", "password");
+//        searchScreen.assertFirstScreenIsShown();
+//        searchScreen.clickOpenMenu();
+//        searchScreen.clickLogOut();
+//        loginScreen.assertScreenIsDisplayedCorrectly();
+//    }
+//
+//    @Test
+//    public void login_L_5(){
+//        System.out.println("START login_L_5");
+//        loginScreen.loginToAccount("1234", "password");
+//        loginScreen.checkPopUp();
+//    }
+//
+//    @Test
+//    public void login_L_6(){
+//        System.out.println("START login_L_6");
+//        loginScreen.loginToAccount("leanne.graham@gmail.com", "password");
+//        searchScreen.clickOpenMenu();
+//        searchScreen.clickLogOut();
+//        loginScreen.assertScreenIsDisplayedCorrectly();
+//    }
+//
+//    @Test
+//    public void login_L_7(){
+//        System.out.println("START login_L_7");
+//        loginScreen.clickLogin();
+//        loginScreen.assertValidationFields();
+//    }
 
     @Test
-    public void login_L_2(){
-        System.out.println("START login_L_2");
-        loginScreen.loginToAccount("leanne", "1234");
-        loginScreen.checkPopUp();
-        loginScreen.assertScreenIsDisplayedCorrectly();
-
-    }
-
-    @Test
-    public void login_L_3(){
-        System.out.println("START login_L_3");
-        loginScreen.loginToAccount("leanne", "1234");
-        loginScreen.checkPopUp();
-        loginScreen.enterPassword("password");
-        loginScreen.clickLogin();
-        searchScreen.assertFirstScreenIsShown();
-    }
-
-    @Test
-    public void login_L_4(){
-        System.out.println("START login_L_4");
-        searchScreen.clickOpenMenu();
-        searchScreen.clickLogOut();
+    public void Searching_W_1(){
+        System.out.println("Start Searching_W_1");
         loginScreen.loginToAccount("leanne", "password");
-        searchScreen.assertFirstScreenIsShown();
         searchScreen.clickOpenMenu();
-        searchScreen.clickLogOut();
-        loginScreen.assertScreenIsDisplayedCorrectly();
+        searchScreen.closeMenu();
+        searchScreen.assertSecondScreenIsShown();
     }
 
     @Test
-    public void login_L_5(){
-        System.out.println("START login_L_5");
-        loginScreen.loginToAccount("1234", "password");
-        loginScreen.checkPopUp();
+    public void Searching_W_2(){
+        System.out.println("Start Searching_W_2");
+        Assert.assertTrue(!searchScreen.getBtnNext().isEnabled());
     }
 
     @Test
-    public void login_L_6(){
-        System.out.println("START login_L_6");
-        loginScreen.loginToAccount("leanne.graham@gmail.com", "password");
-        searchScreen.clickOpenMenu();
-        searchScreen.clickLogOut();
-        loginScreen.assertScreenIsDisplayedCorrectly();
+    public void Searching_W_3(){
+        System.out.println("Start Searching_W_3");
+        searchScreen.chooseBuilding("34");
+        Assert.assertTrue(!searchScreen.getBtnNext().isEnabled());
     }
 
     @Test
-    public void login_L_7(){
-        System.out.println("START login_L_7");
-        loginScreen.clickLogin();
-        loginScreen.assertValidationFields();
+    public void Searching_W_4(){
+        System.out.println("Start Searching_W_4");
+        searchScreen.chooseFloor(1);
+        Assert.assertTrue(!searchScreen.getBtnNext().isEnabled());
     }
 
-
+    @Test
+    public void Searching_W_5(){
+        System.out.println("Start Searching_W_5");
+        searchScreen.chooseRoom(1);
+        searchScreen.clickNext();
+        searchScreen.assertSecondScreenIsShown();
+        searchScreen.clickAddRandomJSON();
+        searchScreen.clickNext();
+        searchScreen.assertThirdScreen();
+    }
 }
